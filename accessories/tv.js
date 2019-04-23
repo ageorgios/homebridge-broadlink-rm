@@ -3,7 +3,6 @@ const delayForDuration = require('../helpers/delayForDuration');
 const catchDelayCancelError = require('../helpers/catchDelayCancelError');
 const ping = require('../helpers/ping');
 const BroadlinkRMAccessory = require('./accessory');
-const request = require('request');
 const sping = require('ping');
 
 class TVAccessory extends BroadlinkRMAccessory {
@@ -216,43 +215,43 @@ class TVAccessory extends BroadlinkRMAccessory {
 
         let hexData = null;
         switch (newValue) {
-          case Characteristic.RemoteKey.REWIND:
+          case Characteristic.RemoteKey.REWIND: //0
             hexData = data.remote.rewind; // not found yet
             break;
-          case Characteristic.RemoteKey.FAST_FORWARD:
+          case Characteristic.RemoteKey.FAST_FORWARD:  //1
             hexData = data.remote.fastForward; // not found yet
             break;
-          case Characteristic.RemoteKey.NEXT_TRACK:
+          case Characteristic.RemoteKey.NEXT_TRACK: //2
             hexData = data.remote.nextTrack; // not found yet
             break;
-          case Characteristic.RemoteKey.PREVIOUS_TRACK:
+          case Characteristic.RemoteKey.PREVIOUS_TRACK: //3
             hexData = data.remote.previousTrack; // not found yet
             break;
-          case Characteristic.RemoteKey.ARROW_UP:
+          case Characteristic.RemoteKey.ARROW_UP: //4
             hexData = data.remote.arrowUp;
             break;
-          case Characteristic.RemoteKey.ARROW_DOWN:
+          case Characteristic.RemoteKey.ARROW_DOWN: //5
             hexData = data.remote.arrowDown;
             break;
-          case Characteristic.RemoteKey.ARROW_LEFT:
+          case Characteristic.RemoteKey.ARROW_LEFT: //6
             hexData = data.remote.arrowLeft;
             break;
-          case Characteristic.RemoteKey.ARROW_RIGHT:
+          case Characteristic.RemoteKey.ARROW_RIGHT: //7
             hexData = data.remote.arrowRight;
             break;
-          case Characteristic.RemoteKey.SELECT:
+          case Characteristic.RemoteKey.SELECT: //8
             hexData = data.remote.select;
             break;
-          case Characteristic.RemoteKey.BACK:
+          case Characteristic.RemoteKey.BACK: //9
             hexData = data.remote.back;
             break;
-          case Characteristic.RemoteKey.EXIT:
+          case Characteristic.RemoteKey.EXIT: //10
             hexData = data.remote.exit;
             break;
-          case Characteristic.RemoteKey.PLAY_PAUSE:
+          case Characteristic.RemoteKey.PLAY_PAUSE: //11
             hexData = data.remote.playPause;
             break;
-          case Characteristic.RemoteKey.INFORMATION:
+          case Characteristic.RemoteKey.INFORMATION: //15
             hexData = data.remote.info;
             break;
         }
