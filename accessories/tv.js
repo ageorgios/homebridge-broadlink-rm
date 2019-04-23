@@ -4,6 +4,7 @@ const catchDelayCancelError = require('../helpers/catchDelayCancelError');
 const ping = require('../helpers/ping');
 const BroadlinkRMAccessory = require('./accessory');
 const request = require('request');
+const sping = require('ping');
 
 class TVAccessory extends BroadlinkRMAccessory {
   constructor(log, config = {}, serviceManagerType) {
@@ -164,9 +165,9 @@ class TVAccessory extends BroadlinkRMAccessory {
   this.serviceManager
     .getCharacteristic(Characteristic.Active)
     .on('get', (callback) => {
-      let { pingIPAddress } = config; 
-      const { state } = this;
-      request("http://192.168.178.26:8001/api/v2/", {timeout: 2000}, function(error, response, body) {
+      const { config, state } = this;
+      let { tvhost } = config; 
+      request("http://"+tvhost+":8001/api/v2/", {timeout: 2000}, function(error, response, body) {
         if (error) {
           state.switchState = false
           log(`${name} is OFF ${error}`);
