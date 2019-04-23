@@ -167,16 +167,10 @@ class TVAccessory extends BroadlinkRMAccessory {
     .on('get', (callback) => {
       const { config, state } = this;
       let { tvhost } = config; 
-      request("http://"+tvhost+":8001/api/v2/", {timeout: 2000}, function(error, response, body) {
-        if (error) {
-          state.switchState = false
-          log(`${name} is OFF ${error}`);
-          return callback(null, 0);
-        }
-        state.switchState = true
-        log(`${name} is ON`);
-        callback(null, 1);
-      })
+       sping.sys.probe(tvhost, (isActive) => {
+        if (isActive) { return callback(null, 1); }
+        else { return callback(null,0) }
+      }, {"min_reply": 1})
     })
     .on('set', (active, callback) => {
       if (active) {
